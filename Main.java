@@ -3,10 +3,12 @@ import java.util.Scanner;
 import kerbal.Simulation.GameState;
 
 
-//Olá professora, o conteúdo de herança está implementado nas classes:
+// Ana Paula, Giovanni, Luis Gustavo
+
+//Olá professora. O conteúdo de herança está implementado nas classes:
 // Part, FuelTank, Engine e CommandModule
-//Eu queria fazer algo um pouco mais complexo
-//Porém acabei ficando sem tempo, por isso tive que cortar algumas features.
+//Queríamos fazer algo um pouco mais complexo
+//Porém acabamos ficando sem tempo, por isso tivemos que cortar algumas features.
 
 public class Main {
     public static void main(String[] args) {
