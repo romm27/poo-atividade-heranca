@@ -51,13 +51,16 @@ public class Main {
             int localGravity = Simulation.currentCelestialBody.getSurfaceGravity();
 
             System.out.println("Actions:");
-
+            System.out.println("0. Exit");
             switch (Simulation.gameState) {
                 case Simulation.GameState.Landed:
                     System.out.println("1. Launch");
                     System.out.println("2. Plant Flag");
                     choice = scanner.nextInt();
                     switch (choice) {
+                    	case 0 :
+                    		System.exit(0);
+                    		break;
                         case 1:
                         	if(Simulation.currentCelestialBody.getComposition() == CelestialBody.BodyComposition.Gaseous) {
                         		System.out.println("It is not possible to land on a gas giant.");
@@ -82,8 +85,11 @@ public class Main {
                     System.out.println("1. Land");
                     System.out.println("2. Local Transfer");
                     System.out.println("3. Interplanetary Transfer");
-
+                    choice = scanner.nextInt();
                     switch (choice) {
+                    	case 0 :
+                    		System.exit(0);
+                    		break;
                         case 1:
                             if (localGravity <= ship.getDeltaV()) {
                                 Simulation.gameState = GameState.Landed;
@@ -104,9 +110,8 @@ public class Main {
                     break;
             }
 
-            scanner.close();
         }
-
+        scanner.close();
     }
 
     // Ship builder methods
