@@ -2,6 +2,8 @@ package kerbal;
 
 import java.util.Scanner;
 
+import kerbal.Simulation.GameState;
+
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -27,12 +29,6 @@ public class Main {
             System.out.println("Ship Builder:");
 
             if(!hasCommandModule){
-            	System.out.print("Choose a name for your rocket: ");
-            	ship.setName(scanner.nextLine());
-            	System.out.println("Name set as:" + ship.getName());
-            	
-            	System.out.println("Please choose a command pod for your rocket.");
-            	
                 for (int i = 0; i < AvailableParts.commandModules.length; i++) {
                     System.out.println(i + ". " + AvailableParts.commandModules[i].getName());
                 }
@@ -45,12 +41,12 @@ public class Main {
             System.out.println(ship.getShipGraphics());
             building = printBuilderMenu(scanner, ship);
         }
-        
-        printShipStats(ship);
 
         boolean running = true;
         while (running) {
-
+        	printShipStats(ship);
+        	printCurrentSimulationStatus(ship);
+        	printActionMenu(scanner);
         }
 
         scanner.close();
@@ -92,15 +88,43 @@ public class Main {
     }
     
     private static void printShipStats(Ship ship) {
-    	System.out.println(ship.getShipGraphics());
-    	System.out.println("Vessel Status:");
-    	System.out.println("Name: " + ship.getName());
-    	System.out.printf("Delta-V: %.0f \n", ship.getDeltaV());
-    	System.out.println("Wight: " + ship.getShipWeight(false) + "/" + ship.getShipWeight(true));
+    	System.out.println("Ship Stats:");
+        System.out.println("Delta V: " + ship.getDeltaV());
+        System.out.printf("Thrust: %.0f \n", ship.getShipThrust());
+    }
+    
+    private static void printCurrentSimulationStatus(Ship ship) {
+    	System.out.println("Currently " + Simulation.gameState.toString() + " in " + Simulation.currentCelestialBody.getName());
     }
 
     // Methods
-    private static void PrintActionMenu(Scanner scanner) {
+    private static void printActionMenu(Scanner scanner) {
+        System.out.println("Actions:");
+        int choice = 0;
 
+        switch (Simulation.gameState) {
+        	case Simulation.GameState.Landed:
+        		System.out.println("1. Launch");
+        		System.out.println("2. Plant Flag");
+                choice = scanner.nextInt();
+                switch (choice) {
+                    case 0:
+                        Simulation.gameState = GameState.Orbiting;
+                        System.out.print("You are now orbiting " + Simulation.currentCelestialBody.getName() + "!");
+                        break;
+                    case 1:
+                        Simulation.gameState = GameState.Orbiting;
+                        break;
+                }
+
+        		break;
+        	case Simulation.GameState.Orbiting:
+        		System.out.println("1. Land");
+        		System.out.println("2. Local Transfer");
+        		System.out.println("3. Interplanetary Transfer");
+        		break;
+        }
+        
+        
     }
 }

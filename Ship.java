@@ -48,14 +48,21 @@ public class Ship {
 	}
 
 	public double getShipThrust(){
-		double thrust = 0;
-		for(int i = 0; i < parts.length; i++){
-			if(parts[i] instanceof Engine){
-				Engine engine = (Engine) parts[i];
-				thrust += engine.getThrust();
-			}
-		}
-		return thrust;
+//		double thrust = 0;
+//		for(int i = 0; i < parts.length; i++){
+//			if(parts[i] instanceof Engine){
+//				Engine engine = (Engine) parts[i];
+//				thrust += engine.getThrust();
+//			}
+//		}
+//		return thrust;
+		Engine temp = (Engine)parts[parts.length - 1];
+		return temp.getThrust();
+	}
+	
+	public double getShipFuelEfficiency(){
+		Engine temp = (Engine)parts[parts.length];
+		return temp.getThrust();
 	}
 	
 	public double getShipWeight(boolean includeFuel) {
@@ -65,19 +72,10 @@ public class Ship {
 
 			if(includeFuel && parts[i] instanceof FuelTank) {
 				FuelTank fuelTank = (FuelTank) parts[i];
-				weight += fuelTank.getCurrentFuel() * Physics.fuelWeight;
+				weight += fuelTank.getFuelCapacity() * Physics.fuelWeight;
 			}
 		}
 		
 		return weight;
-	}
-
-	public void refuel () {
-		for(int i = 0; i < parts.length; i++) {
-			if(parts[i] instanceof FuelTank) {
-				FuelTank fuelTank = (FuelTank) parts[i];
-				fuelTank.setCurrentFuel(fuelTank.getFuelCapacity());
-			}
-		}
 	}
 }
