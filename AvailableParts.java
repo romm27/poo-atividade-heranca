@@ -3,37 +3,35 @@ package kerbal;
 public abstract class AvailableParts {
 	public static CommandModule[] commandModules = new CommandModule[] {
 		new CommandModule("Mk1-3 Command Pod", 
-		"\n" + " / \\" + "\n" +
+		"\n" + " /  \\" + "\n" +
 		"\n" + "|   |" + "\n" +
-		"\n" + "L___|" + "\n"
+		"\n" + "L___|"
 		, 6.0, 3),
-		new CommandModule("Mk1 Command Pod", "mk1pod",
+		new CommandModule("Mk1 Command Pod",
 		"\n" + " ___ " + "\n" +
-		"\n" + "/  \\" + "\n" +
-		"\n" + "_____" + "\n"
+		"\n" + "/   \\" + "\n" +
+		"\n" + "^^^^^"
 		,2.0, 1)
 	};
 	public static FuelTank[] fuelTanks = new FuelTank[] {
-		new fuelTank("FL-T400 Fuel Tank",
+		new FuelTank("FL-T400 Fuel Tank",
 		"\n" + " ___" + "\n" +
 		"\n" + "| F |" + "\n" +
-		"\n" + "L_T_|" + "\n"
+		"\n" + "L_T_|"
 		, 0.5, 450),
-		new fuelTank("Oscar-B Fuel Tank",
-		"\n" + "  -  " + "\n" +
-		"\n" + " ( ) " + "\n" +
-		"\n" + " ( ) " + "\n" +
-		"\n" + "  -  " + "\n"
+		new FuelTank("Oscar-B Fuel Tank",
+		"\n" + " (^) " + "\n" +
+		"\n" + " (_) "
 		, 0.1, 100),
 	};
 	public static Engine[] engines = new Engine[] {
-		new Engine("LV-T30 Liquid Fuel Engine", 
-		"\n" + "  ^  " + "\n" +
-		"\n" + "/  \\" + "\n",
-		1.0, 215),
-		new Engine("LV-909 Liquid Fuel Engine",
-		"\n" + "|| ||" + "\n" +
-		"\n" + "^^ ^^" + "\n" +
-		0.5, 50)
-	};
+        new Engine("LV-T30 Liquid Fuel Engine", 
+        "\n" + "  ^  " + "\n" +
+        "\n" + "/   \\" + "\n",
+        1.0, 215, 0.5),
+        new Engine("LV-909 Liquid Fuel Engine",
+        "\n" + "|| ||" + "\n" +
+        "\n" + "^^ ^^"
+        , 0.5, 50, 0.2)
+    };
 }
