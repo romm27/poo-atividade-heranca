@@ -12,7 +12,7 @@ public class Universe {
 		system = new PlanetarySystem[8];
 
 		//Initialise the first system
-		system[0] = new PlanetarySystem("Kerbol", 1392000, 17.1, CelestialBody.BodyComposition.Gaseous, 0);
+		system[0] = new PlanetarySystem("Kerbol", 1392000, 17.1, CelestialBody.BodyComposition.Plasma, 0);
 		system[1] = new PlanetarySystem("Moho", 250, 2.7, CelestialBody.BodyComposition.Rocky, 526313.830);
 		system[2] = new PlanetarySystem("Eve", 700, 16.7, CelestialBody.BodyComposition.Rocky, 983268.454);
 		system[2].addCelestialBody("Gilly", 13, 0.049, CelestialBody.BodyComposition.Rocky, 31500.000);
@@ -31,6 +31,9 @@ public class Universe {
 		system[7] = new PlanetarySystem("Eeloo", 210, 1.69, CelestialBody.BodyComposition.Rocky, 90118800.000);
 	}
 
+	public double getDistanceFrom(CelestialBody body1, CelestialBody body2) {
+		return Math.abs(body1.getDistanceFromParent() - body2.getDistanceFromParent()) / 1000;
+	}
 
 	public CelestialBody getCelestialBody(String name) {
 		for(int i = 0; i < system.length; i++) {
