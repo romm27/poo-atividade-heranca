@@ -1,8 +1,12 @@
 package kerbal;
-
 import java.util.Scanner;
-
 import kerbal.Simulation.GameState;
+
+
+//Olá professora, o conteúdo de herança está implementado nas classes:
+// Part, FuelTank, Engine e CommandModule
+//Eu queria fazer algo um pouco mais complexo
+//Porém acabei ficando sem tempo, por isso tive que cortar algumas features.
 
 public class Main {
     public static void main(String[] args) {
@@ -40,6 +44,7 @@ public class Main {
 
             System.out.println(ship.getShipGraphics());
             building = printBuilderMenu(scanner, ship);
+            System.out.println(ship.getShipGraphics());
         }
 
         boolean running = true;
@@ -55,7 +60,7 @@ public class Main {
             switch (Simulation.gameState) {
                 case Simulation.GameState.Landed:
                     System.out.println("1. Launch");
-                    System.out.println("2. Plant Flag");
+                    //System.out.println("2. Plant Flag");
                     choice = scanner.nextInt();
                     switch (choice) {
                     	case 0 :
@@ -73,9 +78,9 @@ public class Main {
                                 printNoFuelWarning();
                             }
                         	break;
-                        case 2:
+                        //case 2:
 
-                            break;
+                            //break;
                         default:
                         	return;
                     }
@@ -83,8 +88,8 @@ public class Main {
                     break;
                 case Simulation.GameState.Orbiting:
                     System.out.println("1. Land");
-                    System.out.println("2. Local Transfer");
-                    System.out.println("3. Interplanetary Transfer");
+                    System.out.println("2. Explore Local System");
+                    //System.out.println("3. Interplanetary Transfer");
                     choice = scanner.nextInt();
                     switch (choice) {
                     	case 0 :
@@ -99,11 +104,22 @@ public class Main {
                             }
                             break;
                         case 2:
-
+                        	System.out.println("Current System Map");
+                        	universe.printSystemTable(universe.getSystem(Simulation.currentCelestialBody.getName()));
+                        	System.out.print("Maneuver to: ");
+                        	int maneuverChoice = scanner.nextInt();
+                            CelestialBody temp = universe.getCelestialBody(universe.getSystem(Simulation.currentCelestialBody.getName()).getCelestialBodies()[maneuverChoice].getName());
+                            int distance = universe.getSystem(Simulation.currentCelestialBody.getName()).getDistanceBetweenCelestialBodies(Simulation.currentCelestialBody, temp);
+                            if(distance <= ship.getDeltaV()) {
+                            	Simulation.currentCelestialBody = temp;
+                            	ship.modifyDeltaV(-distance);
+                            } else {
+                            	printNoFuelWarning();
+                            }
                             break;
-                        case 3:
+                        // 3:
 
-                            break;
+                            //break;
                         default:
                         	return;
                     }
@@ -156,8 +172,7 @@ public class Main {
     }
 
     private static void printCurrentSimulationStatus(Ship ship) {
-        System.out.println(
-                "Currently " + Simulation.gameState.toString() + " in " + Simulation.currentCelestialBody.getName());
+        System.out.println("Currently " + Simulation.gameState.toString() + " in " + Simulation.currentCelestialBody.getName());
     }
 
     private static void printNoFuelWarning() {

@@ -31,13 +31,17 @@ public class Universe {
 		system[7] = new PlanetarySystem("Eeloo", 210, 2, CelestialBody.BodyComposition.Rocky, 2987, false);
 	}
 
-	public double getDistanceFrom(CelestialBody body1, CelestialBody body2) {
+	public int getDistanceFrom(CelestialBody body1, CelestialBody body2) {
 		return Math.abs(body1.getDistanceFromParent() - body2.getDistanceFromParent());
+	}
+	
+	public int getDistanceFrom(int body1, CelestialBody body2) {
+		return Math.abs(body1 - body2.getDistanceFromParent());
 	}
 
 	public CelestialBody getCelestialBody(String name) {
 		for(int i = 0; i < system.length; i++) {
-			for(int j = 0; j < system[i].getBodies().length; j++) {
+			for(int j = 0; j < system[i].getCelestialBodies().length; j++) {
 				if(system[i].getBody(j).getName().equals(name)) {
 					return system[i].getBody(j);
 				}
@@ -61,5 +65,23 @@ public class Universe {
 
 	public PlanetarySystem getSystem(int index) {
 		return system[index];
+	}
+	
+
+
+
+	public void printSystemTable(PlanetarySystem system) {
+		CelestialBody[] celestialBodies = system.getCelestialBodies();
+		int originDistance = celestialBodies[0] == Simulation.currentCelestialBody? 0 : Simulation.currentCelestialBody.getDistanceFromParent();
+		for (int i = 0; i < celestialBodies.length; i++) {
+			int finalDistance = system.getDistanceBetweenCelestialBodies(Simulation.currentCelestialBody, celestialBodies[i]);
+			System.out.printf("%d. | name: %s | travel distance: %d | diameter: %d | surface gravity: %d\n", i, 
+			celestialBodies[i].getName(), 
+			finalDistance,
+			celestialBodies[i].getDiameter(), 
+			celestialBodies[i].getSurfaceGravity());
+			
+			//System.out.println(Simulation.currentCelestialBody.getDistanceFromParent()  + " - " + celestialBodies[i].getDistanceFromParent());
+		}
 	}
 }

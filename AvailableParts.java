@@ -3,13 +3,13 @@ package kerbal;
 public abstract class AvailableParts {
 	public static CommandModule[] commandModules = new CommandModule[] {
 		new CommandModule("Mk1-3 Command Pod", 
-		"\n" + " / \\" + "\n" +
-		"\n" + "/   \\" + "\n" +
+		"\n" + " /T\\" + "\n" +
+		"\n" + "/ 0 \\" + "\n" +
 		"\n" +"\\___/"
 		, 6.0, 3),
 		new CommandModule("Mk1 Command Pod",
 		"\n" + " ___ " + "\n" +
-		"\n" + "/   \\" + "\n" +
+		"\n" + "/ 0 \\" + "\n" +
 		"\n" + "^^^^^"
 		,2.0, 1)
 	};
