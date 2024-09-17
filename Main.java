@@ -27,6 +27,12 @@ public class Main {
             System.out.println("Ship Builder:");
 
             if(!hasCommandModule){
+            	System.out.print("Choose a name for your rocket: ");
+            	ship.setName(scanner.nextLine());
+            	System.out.println("Name set as:" + ship.getName());
+            	
+            	System.out.println("Please choose a command pod for your rocket.");
+            	
                 for (int i = 0; i < AvailableParts.commandModules.length; i++) {
                     System.out.println(i + ". " + AvailableParts.commandModules[i].getName());
                 }
@@ -39,6 +45,8 @@ public class Main {
             System.out.println(ship.getShipGraphics());
             building = printBuilderMenu(scanner, ship);
         }
+        
+        printShipStats(ship);
 
         boolean running = true;
         while (running) {
@@ -81,6 +89,14 @@ public class Main {
                 return true;
         }
 		return false;
+    }
+    
+    private static void printShipStats(Ship ship) {
+    	System.out.println(ship.getShipGraphics());
+    	System.out.println("Vessel Status:");
+    	System.out.println("Name: " + ship.getName());
+    	System.out.println("Delta-V: " + ship.getDeltaV());
+    	System.out.println("Wight: " + ship.getShipWeight(false) + "/" + ship.getShipWeight(true));
     }
 
     // Methods

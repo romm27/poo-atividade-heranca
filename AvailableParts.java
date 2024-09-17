@@ -3,9 +3,9 @@ package kerbal;
 public abstract class AvailableParts {
 	public static CommandModule[] commandModules = new CommandModule[] {
 		new CommandModule("Mk1-3 Command Pod", 
-		"\n" + " /  \\" + "\n" +
-		"\n" + "|   |" + "\n" +
-		"\n" + "L___|"
+		"\n" + " / \\" + "\n" +
+		"\n" + "/   \\" + "\n" +
+		"\n" +"\\___/"
 		, 6.0, 3),
 		new CommandModule("Mk1 Command Pod",
 		"\n" + " ___ " + "\n" +
@@ -18,20 +18,20 @@ public abstract class AvailableParts {
 		"\n" + " ___" + "\n" +
 		"\n" + "| F |" + "\n" +
 		"\n" + "L_T_|"
-		, 0.5, 450),
+		, 0.5, 4500),
 		new FuelTank("Oscar-B Fuel Tank",
 		"\n" + " (^) " + "\n" +
 		"\n" + " (_) "
-		, 0.1, 100),
+		, 0.1, 1000),
 	};
 	public static Engine[] engines = new Engine[] {
         new Engine("LV-T30 Liquid Fuel Engine", 
         "\n" + "  ^  " + "\n" +
         "\n" + "/   \\" + "\n",
-        1.0, 215, 0.5),
+        1.0, 2150, 0.5),
         new Engine("LV-909 Liquid Fuel Engine",
         "\n" + "|| ||" + "\n" +
         "\n" + "^^ ^^"
-        , 0.5, 50, 0.2)
+        , 0.5, 500, 0.2)
     };
 }

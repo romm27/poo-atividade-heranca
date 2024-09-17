@@ -1,5 +1,5 @@
 package kerbal;
 
 public abstract class Physics {
-	static double fuelWeight = 1;
+	static double fuelWeight = 0.02;
 }
