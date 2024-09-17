@@ -3,6 +3,7 @@ package kerbal;
 public class Ship {
 	private String name;
 	private Part[] parts;
+	private int deltaV = -1;
 
 	public Ship(String name, Part[] parts) {
 		this.name = name;
@@ -11,11 +12,29 @@ public class Ship {
 	
 	//Methods
 	public double getDeltaV(){
+		if(deltaV < 0) {
+			deltaV = calculateDeltaV();
+		}
+		
+		return deltaV;
+	}
+	
+	public void modifyDeltaV(int ammount){
+		getDeltaV();
+		
+		int temp = deltaV + ammount;
+		
+		if(temp >= 0) {
+			deltaV = temp;
+		}
+	}
+	
+	private int calculateDeltaV() {
 		double deltaV = 0;
 		double totalThrust = getShipThrust();
 		double totalWeight = getShipWeight(true);
 		deltaV = totalThrust / totalWeight * Math.log(totalWeight / (getShipWeight(false)));
-		return deltaV;
+		return (int) deltaV;
 	}
 
 	public String getShipGraphics() {

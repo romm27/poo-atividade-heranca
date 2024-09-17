@@ -28,7 +28,7 @@ public class Main {
         while (building) {
             System.out.println("Ship Builder:");
 
-            if(!hasCommandModule){
+            if (!hasCommandModule) {
                 for (int i = 0; i < AvailableParts.commandModules.length; i++) {
                     System.out.println(i + ". " + AvailableParts.commandModules[i].getName());
                 }
@@ -44,12 +44,69 @@ public class Main {
 
         boolean running = true;
         while (running) {
-        	printShipStats(ship);
-        	printCurrentSimulationStatus(ship);
-        	printActionMenu(scanner);
+            printShipStats(ship);
+            printCurrentSimulationStatus(ship);
+            // Local Variables
+            int choice = 0;
+            int localGravity = Simulation.currentCelestialBody.getSurfaceGravity();
+
+            System.out.println("Actions:");
+
+            switch (Simulation.gameState) {
+                case Simulation.GameState.Landed:
+                    System.out.println("1. Launch");
+                    System.out.println("2. Plant Flag");
+                    choice = scanner.nextInt();
+                    switch (choice) {
+                        case 1:
+                        	if(Simulation.currentCelestialBody.getComposition() == CelestialBody.BodyComposition.Gaseous) {
+                        		System.out.println("It is not possible to land on a gas giant.");
+                        		break;
+                        	}
+                            if (localGravity <= ship.getDeltaV()) {
+                                Simulation.gameState = GameState.Orbiting;
+                                ship.modifyDeltaV(-localGravity);
+                            } else {
+                                printNoFuelWarning();
+                            }
+                        	break;
+                        case 2:
+
+                            break;
+                        default:
+                        	return;
+                    }
+
+                    break;
+                case Simulation.GameState.Orbiting:
+                    System.out.println("1. Land");
+                    System.out.println("2. Local Transfer");
+                    System.out.println("3. Interplanetary Transfer");
+
+                    switch (choice) {
+                        case 1:
+                            if (localGravity <= ship.getDeltaV()) {
+                                Simulation.gameState = GameState.Landed;
+                                ship.modifyDeltaV(-localGravity);
+                            } else {
+                                printNoFuelWarning();
+                            }
+                            break;
+                        case 2:
+
+                            break;
+                        case 3:
+
+                            break;
+                        default:
+                        	return;
+                    }
+                    break;
+            }
+
+            scanner.close();
         }
 
-        scanner.close();
     }
 
     // Ship builder methods
@@ -69,7 +126,7 @@ public class Main {
                 ship.addPart(AvailableParts.fuelTanks[fuelTankChoice]);
                 System.out.println(AvailableParts.fuelTanks[fuelTankChoice].getName() + " added.");
                 return true;
-		case 2:
+            case 2:
                 for (int i = 0; i < AvailableParts.engines.length; i++) {
                     System.out.println(i + ". " + AvailableParts.engines[i].getName());
                 }
@@ -77,54 +134,29 @@ public class Main {
                 ship.addPart(AvailableParts.engines[engineChoice]);
                 System.out.println(AvailableParts.engines[engineChoice].getName() + " added.");
                 return false;
-		case 3:
+            case 3:
                 System.exit(0);
                 break;
             default:
                 System.out.println("Invalid choice.");
                 return true;
         }
-		return false;
+        return false;
     }
-    
+
     private static void printShipStats(Ship ship) {
-    	System.out.println("Ship Stats:");
+        System.out.println("Ship Stats:");
         System.out.println("Delta V: " + ship.getDeltaV());
         System.out.printf("Thrust: %.0f \n", ship.getShipThrust());
     }
-    
+
     private static void printCurrentSimulationStatus(Ship ship) {
-    	System.out.println("Currently " + Simulation.gameState.toString() + " in " + Simulation.currentCelestialBody.getName());
+        System.out.println(
+                "Currently " + Simulation.gameState.toString() + " in " + Simulation.currentCelestialBody.getName());
     }
 
-    // Methods
-    private static void printActionMenu(Scanner scanner) {
-        System.out.println("Actions:");
-        int choice = 0;
-
-        switch (Simulation.gameState) {
-        	case Simulation.GameState.Landed:
-        		System.out.println("1. Launch");
-        		System.out.println("2. Plant Flag");
-                choice = scanner.nextInt();
-                switch (choice) {
-                    case 0:
-                        Simulation.gameState = GameState.Orbiting;
-                        System.out.print("You are now orbiting " + Simulation.currentCelestialBody.getName() + "!");
-                        break;
-                    case 1:
-                        Simulation.gameState = GameState.Orbiting;
-                        break;
-                }
-
-        		break;
-        	case Simulation.GameState.Orbiting:
-        		System.out.println("1. Land");
-        		System.out.println("2. Local Transfer");
-        		System.out.println("3. Interplanetary Transfer");
-        		break;
-        }
-        
-        
+    private static void printNoFuelWarning() {
+        System.out.println("Not enough Delta-V!");
+        System.out.println("P.S: This basically means you don't have enough fuel for this action.");
     }
 }

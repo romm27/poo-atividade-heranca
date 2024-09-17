@@ -3,12 +3,12 @@ package kerbal;
 public class PlanetarySystem {
 	private CelestialBody[] celestialBodies; //0 - is parent
 
-	public PlanetarySystem(String name, double diameter, double surfaceGravity, CelestialBody.BodyComposition composition, double distanceFromParent, boolean hasFlag) {
+	public PlanetarySystem(String name, double diameter, int surfaceGravity, CelestialBody.BodyComposition composition, int distanceFromParent, boolean hasFlag) {
 		celestialBodies = new CelestialBody[1];
 		celestialBodies[0] = new CelestialBody(name, diameter, surfaceGravity, composition, distanceFromParent, hasFlag);
 	}
 
-	public void addCelestialBody(String name, double diameter, double surfaceGravity, CelestialBody.BodyComposition composition, double distanceFromParent, boolean hasFlag) {
+	public void addCelestialBody(String name, double diameter, int surfaceGravity, CelestialBody.BodyComposition composition, int distanceFromParent, boolean hasFlag) {
 		CelestialBody[] temp = new CelestialBody[celestialBodies.length + 1];
 		for (int i = 0; i < celestialBodies.length; i++) {
 			temp[i] = celestialBodies[i];
