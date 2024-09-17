@@ -95,7 +95,7 @@ public class Main {
     	System.out.println(ship.getShipGraphics());
     	System.out.println("Vessel Status:");
     	System.out.println("Name: " + ship.getName());
-    	System.out.println("Delta-V: " + ship.getDeltaV());
+    	System.out.printf("Delta-V: %.0f \n", ship.getDeltaV());
     	System.out.println("Wight: " + ship.getShipWeight(false) + "/" + ship.getShipWeight(true));
     }
 
