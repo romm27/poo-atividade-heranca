@@ -16,7 +16,7 @@ public class Universe {
 		system[1] = new PlanetarySystem("Moho", 250, 5, CelestialBody.BodyComposition.Rocky, 400, false);
 		system[2] = new PlanetarySystem("Eve", 700, 17, CelestialBody.BodyComposition.Rocky, 983, false);
 		system[2].addCelestialBody("Gilly", 13, 1, CelestialBody.BodyComposition.Rocky, 49, false);
-		system[3] = new PlanetarySystem("Kerbin", 600, 10, CelestialBody.BodyComposition.Rocky, 1159, true);
+		system[3] = new PlanetarySystem("Kerbin", 600, 10, CelestialBody.BodyComposition.Rocky, 0, true);
 		system[3].addCelestialBody("Mun", 200, 2, CelestialBody.BodyComposition.Rocky, 23, false);
 		system[3].addCelestialBody("Minmus", 60, 1, CelestialBody.BodyComposition.Rocky, 39, false);
 		system[4] = new PlanetarySystem("Duna", 320, 3, CelestialBody.BodyComposition.Rocky, 1469, false);
